@@ -1,5 +1,6 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const jumpButton = document.getElementById('jumpButton');
 
 canvas.width = 480;
 canvas.height = 640;
@@ -28,22 +29,22 @@ function drawPipes() {
     ctx.fillStyle = 'green';
     ctx.fillRect(pipe.x, 0, pipe.width, pipe.top);
     ctx.fillRect(pipe.x, canvas.height - pipe.bottom, pipe.width, pipe.bottom);
-    pipe.x -= 2;
+    pipe.x -= 2; // Move pipes to the left
   });
 
   if (frame % 100 === 0) {
-    const gap = 100;
-    const top = Math.random() * (canvas.height / 2);
+    const gap = 120; // Gap between pipes
+    const top = Math.random() * (canvas.height / 2) + 50; // Random height for top pipe
     pipes.push({
       x: canvas.width,
-      width: 30,
+      width: 50, // Pipe width
       top: top,
       bottom: canvas.height - top - gap
     });
   }
 
   if (pipes.length > 0 && pipes[0].x + pipes[0].width < 0) {
-    pipes.shift();
+    pipes.shift(); // Remove pipes that go off-screen
     score++;
   }
 }
@@ -58,10 +59,12 @@ function updateBird() {
   bird.velocity += bird.gravity;
   bird.y += bird.velocity;
 
+  // Check collision with ground or ceiling
   if (bird.y + bird.height > canvas.height || bird.y < 0) {
     resetGame();
   }
 
+  // Check collision with pipes
   pipes.forEach(pipe => {
     if (
       bird.x < pipe.x + pipe.width &&
@@ -75,11 +78,11 @@ function updateBird() {
 
 function resetGame() {
   alert(`Game Over! Your score: ${score}`);
-  bird.y = canvas.height / 2;
-  bird.velocity = 0;
-  pipes.length = 0;
-  score = 0;
-  frame = 0;
+  bird.y = canvas.height / 2;    // Reset bird's position
+  bird.velocity = 0;            // Reset bird's velocity
+  pipes.length = 0;             // Clear pipes
+  score = 0;                    // Reset score
+  frame = 0;                    // Reset frame counter
 }
 
 function gameLoop() {
@@ -92,9 +95,17 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-document.addEventListener('keydown', () => {
+// Event Listener for Keyboard Input (Spacebar to Jump)
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'Space') {
+    bird.velocity = bird.lift;
+  }
+});
+
+// Event Listener for Jump Button (For Mobile/Touch Users)
+jumpButton.addEventListener('click', () => {
   bird.velocity = bird.lift;
 });
 
+// Start the game loop
 gameLoop();
-      
