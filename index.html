@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird Clone</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Bird Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <video autoplay muted loop class="background-video">
-            <source src="your-video-url.mp4" type="video/mp4"> <!-- Replace with your video URL -->
-            Your browser does not support the video tag.
-        </video>
-        <canvas id="gameCanvas"></canvas>
-        <button id="playButton" class="play-button">Play</button>
-        <button id="jumpButton" class="jump-button" style="display: none;">Jump</button> <!-- Jump button -->
-    </div>
-    <script src="script.js"></script>
+  <div class="background-video">
+    <video autoplay muted loop>
+      <source src="background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="game-container">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="background-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="game.js"></script>
 </body>
 </html>
