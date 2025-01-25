@@ -82,41 +82,34 @@ function update() {
         ctx.fillStyle = 'red';
         ctx.font = '30px Arial';
         ctx.fillText('Game Over! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
-        ctx.fillText('Press any key or tap to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
-        playButton.style.display = 'block'; // Show the play button
-    }
-
-    requestAnimationFrame(update);
-}
-
-// Function to handle jump
-function jump() {
-    if (!gameOver) {
-        bird.velocity = bird.lift;
-    } else {
-        // Reset game
-        pipes = [];
- bird.y = canvas.height / 2;
-        bird.velocity = 0;
-        score = 0;
-        gameOver = false;
-        frame = 0;
-        playButton.style.display = 'none'; // Hide the play button when the game starts
     }
 }
 
-// Keyboard event listener
-document.addEventListener('keydown', jump);
+function startGame() {
+    gameOver = false;
+    score = 0;
+    pipes = [];
+    bird.y = canvas.height / 2;
+    bird.velocity = 0;
+    frame = 0;
+    playButton.style.display = 'none'; // Hide the play button
+    requestAnimationFrame(gameLoop);
+}
 
-// Touch event listener
-canvas.addEventListener('touchstart', (event) => {
-    event.preventDefault(); // Prevent scrolling on touch devices
-    jump();
-});
+function gameLoop() {
+    update();
+    requestAnimationFrame(gameLoop);
+}
 
-// Play button event listener
-playButton.addEventListener('click', () => {
-    jump(); // Start the game when the play button is clicked
-});
+playButton.addEventListener('click', startGame);
 
-update();
+document.addEventListener('keydown', function(event) {
+    if (event.code === 'Space' && !gameOver) {
+        bird.velocity += bird.lift;
+    }
+}); 
+
+window.addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}); 
