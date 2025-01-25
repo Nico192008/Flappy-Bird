@@ -1,65 +1,34 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.game-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Full height of the viewport */
-    overflow: hidden; /* Prevents overflow of content */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
 .background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the video covers the entire background */
-    z-index: 1; /* Places the video behind the canvas */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2; /* Ensures the canvas is above the video */
-}
-
-.play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 15px 30px;
-    font-size: 24px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 3; /* Ensure the button is above the canvas */
-}
-
-.play-button:hover {
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.jump-button {
-    position: absolute;
-    bottom: 20px; /* Position the jump button at the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 15px 30px;
-    font-size: 24px;
-    background-color: rgba(0, 255, 0, 0.8);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 3; /* Ensure the button is above the canvas */
-}
-
-.jump-button:hover {
-    background-color: rgba(0, 255, 0, 1);
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.8);
 }
