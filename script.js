@@ -81,6 +81,7 @@ function update() {
         ctx.fillStyle = 'red';
         ctx.font = '30px Arial';
         ctx.fillText('Game Over! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
+        ctx.fillText('Press any key to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
     }
 
     requestAnimationFrame(update);
