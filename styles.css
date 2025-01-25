@@ -1,3 +1,16 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+    overflow: hidden; /* Prevents overflow of content */
+}
+
 .background-video {
     position: absolute;
     top: 0;
@@ -8,9 +21,27 @@
     z-index: 1; /* Places the video behind the canvas */
 }
 
-.game-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Full height of the viewport */
-    overflow: hidden; /* Prevents overflow of content */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2; /* Ensures the canvas is above the video */
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 3; /* Ensure the button is above the canvas */
+}
+
+.play-button:hover {
+    background-color: rgba(255, 255, 255, 1);
 }
