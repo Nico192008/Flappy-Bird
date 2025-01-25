@@ -1,5 +1,6 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const playButton = document.getElementById('playButton');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -81,55 +82,41 @@ function update() {
         ctx.fillStyle = 'red';
         ctx.font = '30px Arial';
         ctx.fillText('Game Over! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
-        ctx.fillText('Press any key to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
+        ctx.fillText('Press any key or tap to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
+        playButton.style.display = 'block'; // Show the play button
     }
 
     requestAnimationFrame(update);
 }
 
-document.addEventListener('keydown', () => {
+// Function to handle jump
+function jump() {
     if (!gameOver) {
         bird.velocity = bird.lift;
     } else {
         // Reset game
         pipes = [];
-        bird.y = canvas.height / 2;
+ bird.y = canvas.height / 2;
         bird.velocity = 0;
         score = 0;
         gameOver = false;
         frame = 0;
+        playButton.style.display = 'none'; // Hide the play button when the game starts
     }
+}
+
+// Keyboard event listener
+document.addEventListener('keydown', jump);
+
+// Touch event listener
+canvas.addEventListener('touchstart', (event) => {
+    event.preventDefault(); // Prevent scrolling on touch devices
+    jump();
+});
+
+// Play button event listener
+playButton.addEventListener('click', () => {
+    jump(); // Start the game when the play button is clicked
 });
 
 update();
-``` ### 6. Browser Compatibility
-
-Ensure that you are using a modern web browser that supports HTML5 and JavaScript. Browsers like Chrome, Firefox, and Edge should work without issues. If you're using an outdated browser, consider updating it.
-
-### 7. Check for CSS Issues
-
-Sometimes, CSS can interfere with the game. Ensure that the canvas is not being hidden or covered by other elements. The CSS provided should position the canvas correctly, but double-check that there are no additional styles affecting it.
-
-### 8. Test on Different Devices
-
-If possible, try running the game on different devices or browsers to see if the issue persists. This can help identify if the problem is specific to your current setup.
-
-### 9. Debugging
-
-If the game still doesn't respond, you can add some `console.log` statements in the keydown event listener to see if the event is being triggered:
-
-```javascript
-document.addEventListener('keydown', () => {
-    console.log('Key pressed'); // Debugging line
-    if (!gameOver) {
-        bird.velocity = bird.lift;
-    } else {
-        // Reset game logic
-        pipes = [];
-        bird.y = canvas.height / 2;
-        bird.velocity = 0;
-        score = 0;
-        gameOver = false;
-        frame = 0;
-    }
-});
