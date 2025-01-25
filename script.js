@@ -111,16 +111,3 @@ window.addEventListener('resize', () => {
     canvas.width = window.innerWidth; // Adjust canvas width
     canvas.height = window.innerHeight; // Adjust canvas height
 });
-``` ### Explanation of the Code Changes
-
-In this updated code, a new button labeled "Jump" has been added to the game interface. This button allows players to control the bird's jump without relying on keyboard input. The button is initially hidden and only appears after the player clicks the "Play" button to start the game.
-
-### Key Features
-
-- **Jump Button**: The button is styled and positioned at the bottom of the screen. When clicked, it triggers the `jump` function, which applies a lift to the bird, making it jump.
-- **Game Reset**: The game state resets when the "Play" button is clicked, allowing players to start fresh each time.
-- **Responsive Design**: The canvas resizes with the window, ensuring that the game remains playable on different screen sizes.
-
-### Testing the Game
-
-To test the game, ensure that you have the necessary video file and sound effects in place. Open the `index.html` file in a web browser, click the "Play" button to start the game, and use the "Jump" button to control the bird. Enjoy the enhanced gameplay experience!
